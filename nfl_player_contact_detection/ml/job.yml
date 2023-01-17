@@ -1,0 +1,22 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+code: ./
+command: >-
+  python train.py 
+  --data_folder ${{inputs.data_folder}}
+  --output_folder ${{outputs.output_folder}}
+  --epochs 1
+  --max_examples 100000
+inputs:
+  data_folder:
+    type: uri_folder
+    path: azureml://datastores/workspaceworkingdirectory/paths/Users/janguy/kaggle/nfl_player_contact_detection/data/
+    
+outputs:
+  output_folder:
+    type: uri_folder
+    path: azureml://datastores/workspaceworkingdirectory/paths/Users/janguy/kaggle/nfl_player_contact_detection/output_folder/
+environment: azureml:nfl_contact_detection:1
+compute: azureml:nc6s
+display_name: nfl-contact-detection
+experiment_name: nfl-contact-detection
+description: nfl-contact-detection
